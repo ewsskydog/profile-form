@@ -1,103 +1,76 @@
-import Image from "next/image";
+'use client';
+import { useState } from 'react';
 
-export default function Home() {
+export default function Page() {
+  const [formData, setFormData] = useState({});
+
+  const handleChange = (field: string, value: string | boolean) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = () => {
+    console.log('送信データ:', formData);
+    alert('フォームを送信しました！');
+  };
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <main style={{ maxWidth: 600, margin: '0 auto', padding: '2rem' }}>
+      <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>🧠 プロファイルシート</h1>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      <div>
+        <h2>基本情報</h2>
+        <input placeholder="氏名" onChange={e => handleChange('name', e.target.value)} style={inputStyle} />
+        <input placeholder="役職／立場" onChange={e => handleChange('position', e.target.value)} style={inputStyle} />
+        <input placeholder="関係性" onChange={e => handleChange('relationship', e.target.value)} style={inputStyle} />
+        <input placeholder="初対面日／接点開始時期" onChange={e => handleChange('start_date', e.target.value)} style={inputStyle} />
+      </div>
+
+      <div>
+        <h2>観察メモ①</h2>
+        <textarea placeholder="性格・行動傾向" onChange={e => handleChange('observation1', e.target.value)} style={inputStyle} />
+      </div>
+
+      <div>
+        <h2>観察メモ②</h2>
+        <textarea placeholder="やる気スイッチ・地雷" onChange={e => handleChange('observation2', e.target.value)} style={inputStyle} />
+      </div>
+
+      <div>
+        <h2>会話ログ</h2>
+        <textarea placeholder="印象に残った会話" onChange={e => handleChange('conversation_log', e.target.value)} style={inputStyle} />
+      </div>
+
+      <div>
+        <h2>対応のポイント</h2>
+        <textarea placeholder="対応時の注意点など" onChange={e => handleChange('response_tips', e.target.value)} style={inputStyle} />
+      </div>
+
+      <div>
+        <h2>関係性の目標</h2>
+        {[
+          '信頼構築',
+          '成約・提案の精度向上',
+          '課題解決のパートナーとしての関係',
+          'チームワーク改善'
+        ].map(item => (
+          <label key={item} style={{ display: 'block', margin: '4px 0' }}>
+            <input type="checkbox" onChange={e => handleChange(item, e.target.checked)} /> {item}
+          </label>
+        ))}
+      </div>
+
+      <button onClick={handleSubmit} style={{ marginTop: '1rem', padding: '0.5rem 1rem', background: '#0070f3', color: 'white', border: 'none', borderRadius: 4 }}>
+        送信
+      </button>
+    </main>
   );
 }
+
+const inputStyle = {
+  display: 'block',
+  width: '100%',
+  padding: '0.5rem',
+  margin: '0.5rem 0',
+  border: '1px solid #ccc',
+  borderRadius: '4px'
+};
