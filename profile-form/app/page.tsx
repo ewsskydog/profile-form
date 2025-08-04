@@ -101,3 +101,25 @@ export default function Home() {
     </div>
   );
 }
+// app/page.tsx (または pages/index.js)
+
+export default function Home() {
+  return (
+    <main style={{ padding: 40 }}>
+      <h1>プロファイルフォーム</h1>
+      <form>
+        <label>
+          お名前:
+          <input type="text" name="name" />
+        </label>
+        <br />
+        <label>
+          メールアドレス:
+          <input type="email" name="email" />
+        </label>
+        <br />
+        <button type="submit">送信</button>
+      </form>
+    </main>
+  );
+}

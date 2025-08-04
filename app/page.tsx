@@ -74,3 +74,12 @@ const inputStyle = {
   border: '1px solid #ccc',
   borderRadius: '4px'
 };
+'
+export default function Home() {
+  return (
+    <main>
+      <h1>プロファイルフォームへようこそ！</h1>
+      {/* ここにフォームやリンクなどを追記できます */}
+    </main>
+  );
+}
